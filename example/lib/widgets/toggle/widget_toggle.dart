@@ -1,11 +1,10 @@
 import 'package:example/lib/Code.dart';
 import 'package:example/lib/ThemeConfigurator.dart';
 import 'package:example/lib/top_bar.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ToggleWidgetPage extends StatefulWidget {
-  ToggleWidgetPage({Key key}) : super(key: key);
+  ToggleWidgetPage({Key? key}) : super(key: key);
 
   @override
   createState() => _WidgetPageState();
@@ -37,24 +36,26 @@ class _PageState extends State<_Page> {
   Widget build(BuildContext context) {
     return NeumorphicBackground(
       padding: EdgeInsets.all(8),
-      child: Scaffold(
-        appBar: TopBar(
-          title: "Toggle",
-          actions: <Widget>[
-            ThemeConfigurator(),
-          ],
-        ),
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              _DefaultWidget(),
-              _SmallWidget(),
-              SizedBox(height: 30),
+      child: ScaffoldMessenger(
+        child: Scaffold(
+          appBar: TopBar(
+            title: "Toggle",
+            actions: <Widget>[
+              ThemeConfigurator(),
             ],
+          ),
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                _DefaultWidget(),
+                _SmallWidget(),
+                SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
@@ -272,7 +273,7 @@ NeumorphicToggle(
             ),
             onAnimationChangedFinished: (value) {
               if (value == 0) {
-                Scaffold.of(context)
+                ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text('on back !')));
                 print("onAnimationChangedFinished: $_selectedIndex");
               }
